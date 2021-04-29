@@ -16,6 +16,28 @@ knit: (function(input_file, encoding) {
   margin-right: auto;
   margin-bottom: 12em;
 }
+
+.plotly{
+  width: 100%;
+  align: "center";
+}
+
+.svg-container{
+  width: 100%;
+  align: "center";
+  margin: auto;
+}
+
+.html-widget {
+  margin: auto;
+  min-width: 800px;
+  margin-top: 30px;
+}
+
+<!-- .plot-container{ -->
+<!--   width: 800px; -->
+<!-- } -->
+
 </style>
 
 
@@ -103,7 +125,7 @@ t <- list(
   config(displaylogo = FALSE) %>%
   animation_opts(800))
 
-ggsave(here("fig",file = "pd1p.png"), width = 12, height = 12)
+# ggsave(here("fig",file = "pd1p.png"), width = 12, height = 12)
 
 #--------------------#
 
@@ -136,7 +158,7 @@ t <- list(
   config(displaylogo = FALSE) %>%
   animation_opts(800))
 
-ggsave(here("fig",file = "pd2p.png"), width = 12, height = 12)
+# ggsave(here("fig",file = "pd2p.png"), width = 12, height = 12)
 
 #--------------------#
 # add summary day of all points
@@ -168,7 +190,7 @@ t <- list(
   config(displaylogo = FALSE) %>%
   animation_opts(800))
 
-ggsave(here("fig",file = "pd3p.png"), width = 12, height = 12)
+# ggsave(here("fig",file = "pd3p.png"), width = 12, height = 12)
 
 #--------------------#
 # add summary day of all points
@@ -200,7 +222,7 @@ t <- list(
   config(displaylogo = FALSE) %>%
   animation_opts(800))
 
-ggsave(here("fig",file = "pd4p.png"), width = 12, height = 12)
+# ggsave(here("fig",file = "pd4p.png"), width = 12, height = 12)
 
 #--------------------#
 # add summary day of all points
@@ -232,8 +254,7 @@ t <- list(
   config(displaylogo = FALSE) %>%
   animation_opts(800))
 
-ggsave(here("fig",file = "pd5p.png"), width = 12, height = 12)
-
+# ggsave(here("fig",file = "pd5p.png"), width = 12, height = 12)
 
 #--------------------#
 # add summary day of all points
@@ -265,7 +286,7 @@ t <- list(
   config(displaylogo = FALSE) %>%
   animation_opts(800))
 
-ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
+# ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
 
 #--------------------#
 
@@ -274,7 +295,6 @@ ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
 </div>
 
 <br>
-
 
 ```{r small multiples}
 #--------------------# 
@@ -313,8 +333,6 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
    config(displaylogo = FALSE) %>%
    animation_opts(800) 
 ```
-
-
 
 
 <br>
