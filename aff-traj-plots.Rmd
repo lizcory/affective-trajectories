@@ -76,6 +76,9 @@ ppdf_1 <- rbind(ppdf_1,ppdf_1) %>%
   select(-c(X))
 
 ppdf_1$sampling_day[(nrow(ppdf_1)/2 + 1):nrow(ppdf_1)] <- "99"
+
+ppdf_1$sampling_day <- as.numeric(ppdf_1$sampling_day)
+
 # ppdf_1$sampling_day <- factor(ppdf_1$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
 
 # plot all points
