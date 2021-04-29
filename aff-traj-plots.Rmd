@@ -45,6 +45,13 @@ knit: (function(input_file, encoding) {
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = 'center')
 ```
 
+<br>
+
+We all experience our feelings shifting — throughout the day and across periods of our lives. For some of us, this doesn't change much, while others may feel totally different from one day to the next. To better understand how our feelings work and change, psychologists map feelings along two dimensions: "valence" and "arousal." Valence captures how pleasant you feel, and arousal marks how activated you feel. Together, valence and arousal are termed "affect."
+
+
+This project maps how six individuals 'move' through affective space over a two-week period, or, their 'affective trajectories.' By animating daily reports over time, we can explore where in affective space each person spends the most time. We can also see what emotion words a person uses at each location by hovering over the dots.
+
 ---
 
 <br>
@@ -333,7 +340,6 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
    config(displaylogo = FALSE) %>%
    animation_opts(800) 
 ```
-
 
 <br>
 
