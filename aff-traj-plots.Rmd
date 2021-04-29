@@ -18,12 +18,12 @@ knit: (function(input_file, encoding) {
 }
 
 .plotly{
-  width: 100%;
+  <!-- width: 100%; -->
   align: "center";
 }
 
 .svg-container{
-  width: 100%;
+  <!-- width: 100%; -->
   align: "center";
   margin: auto;
 }
@@ -34,9 +34,23 @@ knit: (function(input_file, encoding) {
   margin-top: 30px;
 }
 
-<!-- .plot-container{ -->
-<!--   width: 800px; -->
-<!-- } -->
+p, #header {
+  max-width: 50vw;
+  min-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  font-size: 11pt;
+}
+
+#header {
+  margin-top: 25px;
+  <!-- margin-left:50px; -->
+  <!-- margin-right:50px; -->
+}
+
 
 </style>
 
