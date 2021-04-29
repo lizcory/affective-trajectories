@@ -9,6 +9,16 @@ knit: (function(input_file, encoding) {
  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 ---
 
+<style type="text/css">
+.main-container {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 12em;
+}
+</style>
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = 'center')
 ```
@@ -45,7 +55,7 @@ library(wesanderson)
 ```
 
 
-```{r load data}
+```{r load data, include=FALSE}
 ## identify list of files we want
 pp_files <- list.files(here("dat"), pattern="*.csv", full.names = TRUE)
 
