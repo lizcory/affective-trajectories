@@ -232,6 +232,7 @@ ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
 
 <br>
 
+<div align = "center">
 ```{r small multiples}
 #--------------------#
 yaxis <- list(
@@ -269,6 +270,8 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
    config(displaylogo = FALSE) %>%
    animation_opts(800) 
 ```
+</div>
+
 ---
 
 <br>
