@@ -1,0 +1,266 @@
+---
+title: "Affective Trajectories"
+author: "Liz Cory"
+output: html_document
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = 'center')
+```
+
+---
+
+<br>
+
+```{r, echo=FALSE,fig.show='hide'}
+## Set up font
+library(gfonts)
+
+# setup_font(
+#   id = "ibm-plex-sans",
+#   output_dir = "./fonts"
+# )
+
+use_font("ibm-plex-sans", "fonts/css/ibm-plex-sans.css")
+```
+
+
+```{r libs}
+
+library(tidyverse)
+library(here)
+library(readxl)
+library(gganimate)
+library(janitor)
+library(ggiraph) 
+library(plotly)
+library(randomcoloR)
+library(wesanderson)
+
+```
+
+
+```{r load data}
+## identify list of files we want
+pp_files <- list.files(here("dat"), pattern="*.csv", full.names = TRUE)
+
+## read in all those files
+df.list <- lapply(pp_files, read.csv)
+names(df.list) <- paste0("ppdf_", seq_len(6))
+
+## add each df to the global environments so we can more easily manipulate in ggplot
+list2env(df.list, envir=.GlobalEnv)
+
+```
+
+
+<div align = "center">
+```{r circumplex, fig.width=6,fig.height=6}
+#--------------------#
+
+colors <- c(wes_palette("Darjeeling1"), wes_palette("Rushmore1")[4])
+
+pd1p <- ggplot(ppdf_1, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity, frame = sampling_day),
+             color = colors[1],
+             alpha = 0.5,width = 5) +
+  ggtitle("participant 1") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+t <- list(
+  family = "IBM Plex Sans",
+  size = 14,
+  color = toRGB("grey50"))
+
+(ly1 <- ggplotly(pd1p, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  animation_opts(800))
+
+ggsave(here("fig",file = "pd1p.png"), width = 12, height = 12)
+
+#--------------------#
+
+pd2p <- ggplot(ppdf_2, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity, frame = sampling_day),
+             color = colors[2],
+             alpha = 0.5,width = 5) +
+  ggtitle("participant 2") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+t <- list(
+  family = "IBM Plex Sans",
+  size = 14,
+  color = toRGB("grey50"))
+
+(ly2 <- ggplotly(pd2p, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  animation_opts(800))
+
+ggsave(here("fig",file = "pd2p.png"), width = 12, height = 12)
+
+#--------------------#
+
+pd3p <- ggplot(ppdf_3, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity, frame = sampling_day),
+             color = colors[3],
+             alpha = 0.5,width = 5) +
+  ggtitle("participant 3") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+t <- list(
+  family = "IBM Plex Sans",
+  size = 14,
+  color = toRGB("grey50"))
+
+(ly3 <- ggplotly(pd3p, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  animation_opts(800))
+
+ggsave(here("fig",file = "pd3p.png"), width = 12, height = 12)
+
+#--------------------#
+
+pd4p <- ggplot(ppdf_4, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity, frame = sampling_day),
+             color = colors[4],
+             alpha = 0.5,width = 5) +
+  ggtitle("participant 4") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+t <- list(
+  family = "IBM Plex Sans",
+  size = 14,
+  color = toRGB("grey50"))
+
+(ly4 <- ggplotly(pd4p, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  animation_opts(800))
+
+ggsave(here("fig",file = "pd4p.png"), width = 12, height = 12)
+
+#--------------------#
+
+pd5p <- ggplot(ppdf_5, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity, frame = sampling_day),
+             color = colors[5],
+             alpha = 0.5,width = 5) +
+  ggtitle("participant 5") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+t <- list(
+  family = "IBM Plex Sans",
+  size = 14,
+  color = toRGB("grey50"))
+
+(ly5 <- ggplotly(pd5p, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  animation_opts(800))
+
+ggsave(here("fig",file = "pd5p.png"), width = 12, height = 12)
+
+
+#--------------------#
+
+pd6p <- ggplot(ppdf_6, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity, frame = sampling_day),
+             color = colors[6],
+             alpha = 0.5,width = 5) +
+  ggtitle("participant 6") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+t <- list(
+  family = "IBM Plex Sans",
+  size = 14,
+  color = toRGB("grey50"))
+
+(ly6 <- ggplotly(pd6p, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  animation_opts(800))
+
+ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
+
+#--------------------#
+
+
+```
+</div>
+
+<br>
+
+```{r small multiples}
+#--------------------#
+yaxis <- list(
+  # title = 'arousal',
+  # automargin = TRUE
+  yanchor = "bottom"
+
+  )
+
+xaxis <- list(
+  # title = 'valence',
+  # automargin = TRUE
+  xanchor = "right"
+  )
+
+title <- list(
+  text = "All participants",
+  xanchor = "left"
+)
+
+subplot(ly1, ly2, ly3, ly4, ly5, ly6, 
+        nrows = 2, 
+        margin = 0.025,
+        titleX = F,
+        titleY = F,
+        shareX = T,
+        shareY = T, 
+        heights = c(0.40,0.40),
+        widths = c(0.32,0.34,0.32)) %>% 
+   layout(font = t,
+          width = 900, height = 750,
+          yaxis = yaxis,
+          xaxis = xaxis,
+          title = title) %>%
+   config(displaylogo = FALSE) %>%
+   animation_opts(800) 
+```
+---
+
+<br>
+
+---
