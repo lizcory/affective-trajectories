@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align 
 
 <br>
 
-```{r, echo=FALSE,fig.show='hide'}
+```{r fonts, echo=FALSE,fig.show='hide'}
 ## Set up font
 library(gfonts)
 
@@ -39,9 +39,7 @@ library(gfonts)
 use_font("ibm-plex-sans", "fonts/css/ibm-plex-sans.css")
 ```
 
-
 ```{r libs}
-
 library(tidyverse)
 library(here)
 library(readxl)
@@ -51,9 +49,7 @@ library(ggiraph)
 library(plotly)
 library(randomcoloR)
 library(wesanderson)
-
 ```
-
 
 ```{r load data, include=FALSE}
 ## identify list of files we want
@@ -68,13 +64,21 @@ list2env(df.list, envir=.GlobalEnv)
 
 ```
 
-
 <div align = "center">
 ```{r circumplex, fig.width=6,fig.height=6}
 #--------------------#
 
+# get colors
 colors <- c(wes_palette("Darjeeling1"), wes_palette("Rushmore1")[4])
 
+# add summary day of all points
+ppdf_1 <- rbind(ppdf_1,ppdf_1) %>% 
+  select(-c(X))
+
+ppdf_1$sampling_day[(nrow(ppdf_1)/2 + 1):nrow(ppdf_1)] <- "sum"
+ppdf_1$sampling_day <- factor(ppdf_1$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
+
+# plot all points
 pd1p <- ggplot(ppdf_1, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   geom_hline(yintercept = 0, color = "darkgray") +
@@ -100,6 +104,14 @@ ggsave(here("fig",file = "pd1p.png"), width = 12, height = 12)
 
 #--------------------#
 
+# add summary day of all points
+ppdf_2 <- rbind(ppdf_2,ppdf_2) %>% 
+  select(-c(X))
+
+ppdf_2$sampling_day[(nrow(ppdf_2)/2 + 1):nrow(ppdf_2)] <- "sum"
+ppdf_2$sampling_day <- factor(ppdf_2$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
+
+# plot all points
 pd2p <- ggplot(ppdf_2, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   geom_hline(yintercept = 0, color = "darkgray") +
@@ -124,7 +136,14 @@ t <- list(
 ggsave(here("fig",file = "pd2p.png"), width = 12, height = 12)
 
 #--------------------#
+# add summary day of all points
+ppdf_3 <- rbind(ppdf_3,ppdf_3) %>% 
+  select(-c(X))
 
+ppdf_3$sampling_day[(nrow(ppdf_3)/2 + 1):nrow(ppdf_3)] <- "sum"
+ppdf_3$sampling_day <- factor(ppdf_3$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
+
+# plot all points
 pd3p <- ggplot(ppdf_3, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   geom_hline(yintercept = 0, color = "darkgray") +
@@ -149,7 +168,14 @@ t <- list(
 ggsave(here("fig",file = "pd3p.png"), width = 12, height = 12)
 
 #--------------------#
+# add summary day of all points
+ppdf_4 <- rbind(ppdf_4,ppdf_4) %>% 
+  select(-c(X))
 
+ppdf_4$sampling_day[(nrow(ppdf_4)/2 + 1):nrow(ppdf_4)] <- "sum"
+ppdf_4$sampling_day <- factor(ppdf_4$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
+
+# plot all points
 pd4p <- ggplot(ppdf_4, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   geom_hline(yintercept = 0, color = "darkgray") +
@@ -174,7 +200,14 @@ t <- list(
 ggsave(here("fig",file = "pd4p.png"), width = 12, height = 12)
 
 #--------------------#
+# add summary day of all points
+ppdf_5 <- rbind(ppdf_5,ppdf_5) %>% 
+  select(-c(X))
 
+ppdf_5$sampling_day[(nrow(ppdf_5)/2 + 1):nrow(ppdf_5)] <- "sum"
+ppdf_5$sampling_day <- factor(ppdf_5$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
+
+# plot all points
 pd5p <- ggplot(ppdf_5, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   geom_hline(yintercept = 0, color = "darkgray") +
@@ -200,7 +233,14 @@ ggsave(here("fig",file = "pd5p.png"), width = 12, height = 12)
 
 
 #--------------------#
+# add summary day of all points
+ppdf_6 <- rbind(ppdf_6,ppdf_6) %>% 
+  select(-c(X))
 
+ppdf_6$sampling_day[(nrow(ppdf_6)/2 + 1):nrow(ppdf_6)] <- "sum"
+ppdf_6$sampling_day <- factor(ppdf_6$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14, 15,"sum"))
+
+# plot all points
 pd6p <- ggplot(ppdf_6, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   geom_hline(yintercept = 0, color = "darkgray") +
@@ -232,9 +272,9 @@ ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
 
 <br>
 
-<div align = "center">
+
 ```{r small multiples}
-#--------------------#
+#--------------------# 
 yaxis <- list(
   # title = 'arousal',
   # automargin = TRUE
@@ -263,17 +303,17 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
         heights = c(0.40,0.40),
         widths = c(0.32,0.34,0.32)) %>% 
    layout(font = t,
-          width = 900, height = 750,
+          width = 800, height = 650,
           yaxis = yaxis,
           xaxis = xaxis,
           title = title) %>%
    config(displaylogo = FALSE) %>%
    animation_opts(800) 
 ```
-</div>
 
----
+
+
 
 <br>
 
----
+
