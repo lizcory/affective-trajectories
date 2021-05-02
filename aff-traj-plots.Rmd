@@ -14,7 +14,7 @@ knit: (function(input_file, encoding) {
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 12em;
+  margin-bottom: 4em;
 }
 
 .plotly{
@@ -22,10 +22,11 @@ knit: (function(input_file, encoding) {
   align: "center";
 }
 
-.svg-container{
+.svg-container, img{
   <!-- width: 100%; -->
   align: "center";
   margin: auto;
+  position: relative;
 }
 
 .html-widget {
@@ -34,7 +35,7 @@ knit: (function(input_file, encoding) {
   margin-top: 30px;
 }
 
-p, #header {
+p, #header, #footer {
   max-width: 50vw;
   min-width: 500px;
   margin-left: auto;
@@ -42,7 +43,18 @@ p, #header {
 }
 
 p {
-  font-size: 11pt;
+  font-size: 11pt
+  display: relative;
+}
+
+p > img {
+  display: relative;
+}
+
+
+#plot-container {
+  align: "center";
+  margin: auto;
 }
 
 #header {
@@ -51,6 +63,14 @@ p {
   <!-- margin-right:50px; -->
 }
 
+#footer {
+  margin-top: 150px;
+  align: "center";
+}
+
+#footer > p {
+  font-size: 10pt;
+}
 
 </style>
 
@@ -64,7 +84,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align 
 We all experience our feelings shifting — throughout the day and across periods of our lives. For some of us, this doesn't change much, while others may feel totally different from one day to the next. To better understand how our feelings work and change, psychologists map them along two dimensions: "valence" and "arousal." Valence captures how pleasant you feel, and arousal marks how activated you feel. Together, valence and arousal are termed "affect."
 
 
-This project documents how six individuals 'move' through affective space over a two-week period, or, their 'affective trajectories.' By animating daily reported feelings, we can explore where in affective space each person spends the most time across the sampling period. We can also see what emotion words a person uses to describe their feelings at each location by hovering over the dots.
+This project documents how six individuals move through affective space over a two-week period, or, their <i>affective trajectories</i>. By animating daily reported feelings, we can explore where in affective space each person spends the most time across the sampling period. We can also see what emotion words a person uses to describe their feelings at each location by hovering over the dots.
 
 ---
 
@@ -105,34 +125,39 @@ names(df.list) <- paste0("ppdf_", seq_len(6))
 ## add each df to the global environments so we can more easily manipulate in ggplot
 list2env(df.list, envir=.GlobalEnv)
 
-```
-
-<div align = "center">
-```{r circumplex, fig.width=6,fig.height=6}
-#--------------------#
-
 # get colors
 colors <- c(wes_palette("Darjeeling1"), wes_palette("Rushmore1")[4])
 
+```
+
+<div id=plot-container, align = "center">
+<h3>Participant 1</h3>
+```{r circumplex PP1}
+#--------------------#
 # add summary day of all points
-ppdf_1 <- rbind(ppdf_1,ppdf_1) %>% 
-  select(-c(X))
-
-ppdf_1$sampling_day[(nrow(ppdf_1)/2 + 1):nrow(ppdf_1)] <- "99"
-
-ppdf_1$sampling_day <- as.numeric(ppdf_1$sampling_day)
+# ppdf_1 <- rbind(ppdf_1,ppdf_1) %>% 
+#   select(-c(X))
+# 
+# ppdf_1$sampling_day[(nrow(ppdf_1)/2 + 1):nrow(ppdf_1)] <- "99"
+# 
+# ppdf_1$sampling_day <- as.numeric(ppdf_1$sampling_day)
 
 # ppdf_1$sampling_day <- factor(ppdf_1$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
 
 # plot all points
 pd1p <- ggplot(ppdf_1, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
   geom_hline(yintercept = 0, color = "darkgray") +
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
              color = colors[1],
-             alpha = 0.5,width = 5) +
-  ggtitle("participant 1") +
+             alpha = 0.4,width = 5) +
+  # ggtitle("Participant 1") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -141,31 +166,51 @@ t <- list(
   size = 14,
   color = toRGB("grey50"))
 
-(ly1 <- ggplotly(pd1p, width = 600, height = 600) %>%
+ly1 <- ggplotly(pd1p, width = 600, height = 600) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
-  animation_opts(800))
+  animation_opts(800)
 
+ly1
 # ggsave(here("fig",file = "pd1p.png"), width = 12, height = 12)
 
-#--------------------#
+```
 
-# add summary day of all points
-ppdf_2 <- rbind(ppdf_2,ppdf_2) %>% 
-  select(-c(X))
+<br>
+<br>
 
-ppdf_2$sampling_day[(nrow(ppdf_2)/2 + 1):nrow(ppdf_2)] <- 99
-# ppdf_2$sampling_day <- factor(ppdf_2$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
+```{r 1over, fig.align='center', fig.height=6, fig.width=6.35}
+pd1p + ggtitle("All sampling days")
+```
+
+<br>
+<br>
+<br>
+
+<h3>Participant 2</h3>
+```{r circ PP2, fig.width=6,fig.height=6, fig.align='center'}
+
+# # add summary day of all points
+# ppdf_2 <- rbind(ppdf_2,ppdf_2) %>% 
+#   select(-c(X))
+# 
+# ppdf_2$sampling_day[(nrow(ppdf_2)/2 + 1):nrow(ppdf_2)] <- 99
+# # ppdf_2$sampling_day <- factor(ppdf_2$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
 
 # plot all points
 pd2p <- ggplot(ppdf_2, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
   geom_hline(yintercept = 0, color = "darkgray") +
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
              color = colors[2],
-             alpha = 0.5,width = 5) +
-  ggtitle("participant 2") +
+             alpha = 0.4,width = 5) +
+  # ggtitle("Participant 2") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -181,23 +226,44 @@ t <- list(
 
 # ggsave(here("fig",file = "pd2p.png"), width = 12, height = 12)
 
-#--------------------#
-# add summary day of all points
-ppdf_3 <- rbind(ppdf_3,ppdf_3) %>% 
-  select(-c(X))
 
-ppdf_3$sampling_day[(nrow(ppdf_3)/2 + 1):nrow(ppdf_3)] <- 99
-# ppdf_3$sampling_day <- factor(ppdf_3$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
+```
+
+<br>
+<br>
+
+```{r 2over, fig.align='center', fig.height=6, fig.width=6.35}
+pd2p + ggtitle("All sampling days")
+```
+
+<br>
+<br>
+<br>
+
+<h3>Participant 3</h3>
+```{r circ PP3, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
+ 
+# add summary day of all points
+# ppdf_3 <- rbind(ppdf_3,ppdf_3) %>% 
+#   select(-c(X))
+# 
+# ppdf_3$sampling_day[(nrow(ppdf_3)/2 + 1):nrow(ppdf_3)] <- 99
+# # ppdf_3$sampling_day <- factor(ppdf_3$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
 
 # plot all points
 pd3p <- ggplot(ppdf_3, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
   geom_hline(yintercept = 0, color = "darkgray") +
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
              color = colors[3],
-             alpha = 0.5,width = 5) +
-  ggtitle("participant 3") +
+             alpha = 0.4,width = 5) +
+  # ggtitle("Participant 3") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -213,23 +279,44 @@ t <- list(
 
 # ggsave(here("fig",file = "pd3p.png"), width = 12, height = 12)
 
-#--------------------#
-# add summary day of all points
-ppdf_4 <- rbind(ppdf_4,ppdf_4) %>% 
-  select(-c(X))
 
-ppdf_4$sampling_day[(nrow(ppdf_4)/2 + 1):nrow(ppdf_4)] <- 99
-# ppdf_4$sampling_day <- factor(ppdf_4$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
+```
+
+<br>
+<br>
+
+```{r 3over, fig.align='center', fig.height=6, fig.width=6.35}
+pd3p + ggtitle("All sampling days")
+```
+
+<br>
+<br>
+<br>
+
+<h3>Participant 4</h3>
+```{r circ PP4, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
+
+# add summary day of all points 
+# ppdf_4 <- rbind(ppdf_4,ppdf_4) %>% 
+#   select(-c(X))
+# 
+# ppdf_4$sampling_day[(nrow(ppdf_4)/2 + 1):nrow(ppdf_4)] <- 99
+# # ppdf_4$sampling_day <- factor(ppdf_4$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,"sum"))
 
 # plot all points
 pd4p <- ggplot(ppdf_4, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
   geom_hline(yintercept = 0, color = "darkgray") +
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
              color = colors[4],
-             alpha = 0.5,width = 5) +
-  ggtitle("participant 4") +
+             alpha = 0.4,width = 5) +
+  # ggtitle("Participant 4") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -245,23 +332,43 @@ t <- list(
 
 # ggsave(here("fig",file = "pd4p.png"), width = 12, height = 12)
 
-#--------------------#
-# add summary day of all points
-ppdf_5 <- rbind(ppdf_5,ppdf_5) %>% 
-  select(-c(X))
 
-ppdf_5$sampling_day[(nrow(ppdf_5)/2 + 1):nrow(ppdf_5)] <- 99
-# ppdf_5$sampling_day <- factor(ppdf_5$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
+```
+
+<br>
+<br>
+
+```{r 4over, fig.align='center', fig.height=6, fig.width=6.35}
+pd4p + ggtitle("All sampling days")
+```
+
+<br>
+<br>
+<br>
+
+<h3>Participant 5</h3>
+```{r circ PP5, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
+# # add summary day of all points
+# ppdf_5 <- rbind(ppdf_5,ppdf_5) %>% 
+#   select(-c(X)) 
+# 
+# ppdf_5$sampling_day[(nrow(ppdf_5)/2 + 1):nrow(ppdf_5)] <- 99
+# # ppdf_5$sampling_day <- factor(ppdf_5$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,"sum"))
 
 # plot all points
 pd5p <- ggplot(ppdf_5, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
-  geom_hline(yintercept = 0, color = "darkgray") +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") + 
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
              color = colors[5],
-             alpha = 0.5,width = 5) +
-  ggtitle("participant 5") +
+             alpha = 0.4,width = 5) +
+  # ggtitle("Participant 5") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -277,23 +384,42 @@ t <- list(
 
 # ggsave(here("fig",file = "pd5p.png"), width = 12, height = 12)
 
-#--------------------#
-# add summary day of all points
-ppdf_6 <- rbind(ppdf_6,ppdf_6) %>% 
-  select(-c(X))
+```
 
-ppdf_6$sampling_day[(nrow(ppdf_6)/2 + 1):nrow(ppdf_6)] <- 99
-# ppdf_6$sampling_day <- factor(ppdf_6$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14, 15,"sum"))
+<br>
+<br>
+
+```{r 5over, fig.align='center', fig.height=6, fig.width=6.35}
+pd5p + ggtitle("All sampling days")
+```
+
+<br>
+<br>
+<br>
+
+<h3>Participant 6</h3>
+```{r r circ PP6, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
+# # add summary day of all points 
+# ppdf_6 <- rbind(ppdf_6,ppdf_6) %>% 
+#   select(-c(X))
+# 
+# ppdf_6$sampling_day[(nrow(ppdf_6)/2 + 1):nrow(ppdf_6)] <- 99
+# # ppdf_6$sampling_day <- factor(ppdf_6$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14, 15,"sum"))
 
 # plot all points
 pd6p <- ggplot(ppdf_6, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
   geom_hline(yintercept = 0, color = "darkgray") +
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
              color = colors[6],
-             alpha = 0.5,width = 5) +
-  ggtitle("participant 6") +
+             alpha = 0.4,width = 5) +
+  # ggtitle("Participant 6") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -306,36 +432,45 @@ t <- list(
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
   animation_opts(800))
-
-# ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12)
-
-#--------------------#
+ 
+# ggsave(here("fig",file = "pd6p.png"), width = 12, height = 12) 
 
 
 ```
-</div>
+
+<br>
+<br>
+
+```{r 6over, fig.align='center', fig.height=6, fig.width=6.35}
+pd6p + ggtitle("All sampling days")
+```
+
+<br>
+<br>
+<br>
 
 <br>
 
+<h3>All participants</h3>
 ```{r small multiples}
-#--------------------# 
+#--------------------#   
 yaxis <- list(
   # title = 'arousal',
-  # automargin = TRUE
-  yanchor = "bottom"
-
+  # automargin = TRUE,
+  # yanchor = "bottom"
+  # tickangle = 90
   )
+# 
+# xaxis <- list(
+#   title = 'valence',
+#   automargin = TRUE,
+#   xanchor = "right"
+#   ) 
 
-xaxis <- list(
-  # title = 'valence',
-  # automargin = TRUE
-  xanchor = "right"
-  )
-
-title <- list(
-  text = "All participants",
-  xanchor = "left"
-)
+# title <- list(
+#   text = "All participants",
+#   xanchor = "left"
+# )
 
 subplot(ly1, ly2, ly3, ly4, ly5, ly6, 
         nrows = 2, 
@@ -348,13 +483,24 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
         widths = c(0.32,0.34,0.32)) %>% 
    layout(font = t,
           width = 800, height = 650,
-          yaxis = yaxis,
-          xaxis = xaxis,
-          title = title) %>%
+          # yaxis = yaxis,
+          # xaxis = xaxis,
+          title = title,
+          annotations = list(
+            list(x = 0.5 , y = 0, text = "valence", showarrow = F, xref='paper', yref='paper', 
+                 xanchor = "middle"),
+            list(x = -0.07 , y = 0.5, text = "arousal", showarrow = F, xref='paper', yref='paper',
+                 yanchor = "middle", textangle = 270))) %>%
    config(displaylogo = FALSE) %>%
    animation_opts(800) 
 ```
+</div>
 
-<br>
 
+<div id = "footer">
+
+<i>Completed for ARTG 6100 Spring 2021, IDDV Program, Northeastern University. Data
+provided by the <a href = "https://www.affective-science.org/">Interdisciplinary Affective Science Lab</a></i>.
+
+</div>
 
