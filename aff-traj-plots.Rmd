@@ -179,7 +179,7 @@ ly1
 <br>
 <br>
 
-```{r 1over, fig.align='center', fig.height=6, fig.width=6.35}
+```{r 1over, fig.align='center', fig.height=6, fig.width=6.25}
 pd1p + ggtitle("All sampling days")
 ```
 
@@ -232,7 +232,7 @@ t <- list(
 <br>
 <br>
 
-```{r 2over, fig.align='center', fig.height=6, fig.width=6.35}
+```{r 2over, fig.align='center', fig.height=6, fig.width=6.25}
 pd2p + ggtitle("All sampling days")
 ```
 
@@ -285,7 +285,7 @@ t <- list(
 <br>
 <br>
 
-```{r 3over, fig.align='center', fig.height=6, fig.width=6.35}
+```{r 3over, fig.align='center', fig.height=6, fig.width=6.25}
 pd3p + ggtitle("All sampling days")
 ```
 
@@ -338,7 +338,7 @@ t <- list(
 <br>
 <br>
 
-```{r 4over, fig.align='center', fig.height=6, fig.width=6.35}
+```{r 4over, fig.align='center', fig.height=6, fig.width=6.25}
 pd4p + ggtitle("All sampling days")
 ```
 
@@ -389,7 +389,7 @@ t <- list(
 <br>
 <br>
 
-```{r 5over, fig.align='center', fig.height=6, fig.width=6.35}
+```{r 5over, fig.align='center', fig.height=6, fig.width=6.25}
 pd5p + ggtitle("All sampling days")
 ```
 
@@ -441,7 +441,7 @@ t <- list(
 <br>
 <br>
 
-```{r 6over, fig.align='center', fig.height=6, fig.width=6.35}
+```{r 6over, fig.align='center', fig.height=6, fig.width=6.25}
 pd6p + ggtitle("All sampling days")
 ```
 
