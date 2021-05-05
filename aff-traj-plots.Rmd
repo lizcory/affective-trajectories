@@ -1,6 +1,5 @@
+
 ---
-title: "Affective Trajectories"
-author: "Liz Cory"
 output: html_document
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
@@ -15,14 +14,19 @@ knit: (function(input_file, encoding) {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .plotly{
   <!-- width: 100%; -->
   align: "center";
+  align-items: center;
+
 }
 
-.svg-container, img{
+.svg-container{
   <!-- width: 100%; -->
   align: "center";
   margin: auto;
@@ -32,45 +36,83 @@ knit: (function(input_file, encoding) {
 .html-widget {
   margin: auto;
   min-width: 800px;
-  margin-top: 30px;
+  <!-- margin-top: 30px; -->
 }
 
-p, #header, #footer {
+.pp-box {
+  display: flex;
+  align-items: "center";
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.pp-header {
+  margin-top: 25px;
+}
+
+<!-- .summary { -->
+<!--   padding-left: 20px; -->
+<!-- } -->
+
+<!-- g.draglayer.cursor-crosshair { -->
+<!--   width: 600px; -->
+<!--   height: 600px; -->
+<!-- } -->
+
+p, #opener, #footer {
   max-width: 50vw;
-  min-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  min-width: 600px;
+  <!-- width: 500px; -->
+  margin: auto;
+  <!-- margin-left: auto; -->
+  <!-- margin-right: auto; -->
+  margin-bottom: 25px;
+
 }
 
 p {
-  font-size: 11pt
+  font-size: 12pt;
   display: relative;
 }
 
-p > img {
-  display: relative;
+#overall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 650px;
 }
 
-
-#plot-container {
-  align: "center";
+#opener {
+  <!-- max-width: 50vw; -->
+  <!-- min-width: 500px; -->
+  <!-- width: 500px; -->
   margin: auto;
+
 }
 
-#header {
+.ani-plot-container {
+  padding-right: 20px;
+  margin-bottom: 25px;
+}
+
+#title {
   margin-top: 25px;
-  <!-- margin-left:50px; -->
-  <!-- margin-right:50px; -->
+  width: 500px;
+}
+
+#byline {
+  margin-bottom: 25px;
 }
 
 #footer {
-  margin-top: 150px;
+  margin-top: 50px;
   align: "center";
 }
 
 #footer > p {
   font-size: 10pt;
 }
+
 
 </style>
 
@@ -79,16 +121,23 @@ p > img {
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = 'center')
 ```
 
-<br>
+<div id = "overall">
 
-We all experience our feelings shifting — throughout the day and across periods of our lives. For some of us, this doesn't change much, while others may feel totally different from one day to the next. To better understand how our feelings work and change, psychologists map them along two dimensions: "valence" and "arousal." Valence captures how pleasant you feel, and arousal marks how activated you feel. Together, valence and arousal are termed "affect."
+<div id = "opener">
+
+<h1 id = "title">Affective Trajectories</h1>
+<h4 id = "byline">by Liz Cory</h4>
+
+We all experience our feelings shifting — throughout the day and across periods of our lives. For some of us, the changes are slight, while others may feel totally different from one day to the next. To better understand how our feelings work and change, psychologists map them along two dimensions: "valence" and "arousal." Valence captures how pleasant you feel, and arousal marks how activated you feel. Together, valence and arousal are termed "affect."
 
 
 This project documents how six individuals move through affective space over a two-week period, or, their <i>affective trajectories</i>. By animating daily reported feelings, we can explore where in affective space each person spends the most time across the sampling period. We can also see what emotion words a person uses to describe their feelings at each location by hovering over the dots.
 
+</div>
+
+
 ---
 
-<br>
 
 ```{r fonts, echo=FALSE,fig.show='hide'}
 ## Set up font
@@ -130,8 +179,9 @@ colors <- c(wes_palette("Darjeeling1"), wes_palette("Rushmore1")[4])
 
 ```
 
-<div id=plot-container, align = "center">
-<h3>Participant 1</h3>
+<h3 class = "pp-header">Participant 1</h3>
+<div class ="pp-box" align = "center">
+<div class= "ani-plot-container">
 ```{r circumplex PP1}
 #--------------------#
 # add summary day of all points
@@ -161,33 +211,53 @@ pd1p <- ggplot(ppdf_1, aes(x = valence, y = arousal, label = emo_word)) +
   xlim(-50,50) +
   ylim(-50,50)
 
+# plot all points
+pd1p2 <- ggplot(ppdf_1, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity),
+             color = colors[1],
+             alpha = 0.4,width = 5) +
+  ggtitle("All sampling days") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
 t <- list(
   family = "IBM Plex Sans",
   size = 14,
   color = toRGB("grey50"))
 
-ly1 <- ggplotly(pd1p, width = 600, height = 600) %>%
+(ly1 <- ggplotly(pd1p, width = 610, height = 672) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
-  animation_opts(800)
+  animation_opts(800))
 
-ly1
 # ggsave(here("fig",file = "pd1p.png"), width = 12, height = 12)
 
 ```
+</div>
 
-<br>
-<br>
+```{r 1over, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 
-```{r 1over, fig.align='center', fig.height=6, fig.width=6.25}
-pd1p + ggtitle("All sampling days")
+(ly1_2 <- ggplotly(pd1p2, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  config(displayModeBar = FALSE))
+
+# pd1p + ggtitle("All sampling days")
+
 ```
+</div>
 
-<br>
-<br>
-<br>
-
-<h3>Participant 2</h3>
+<h3 class = "pp-header">Participant 2</h3>
+<div class ="pp-box" align = "center">
+<div class= "ani-plot-container">
 ```{r circ PP2, fig.width=6,fig.height=6, fig.align='center'}
 
 # # add summary day of all points
@@ -214,12 +284,29 @@ pd2p <- ggplot(ppdf_2, aes(x = valence, y = arousal, label = emo_word)) +
   xlim(-50,50) +
   ylim(-50,50)
 
+# plot all points
+pd2p2 <- ggplot(ppdf_2, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity),
+             color = colors[2],
+             alpha = 0.4,width = 5) +
+  ggtitle("All sampling days") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
 t <- list(
   family = "IBM Plex Sans",
   size = 14,
   color = toRGB("grey50"))
 
-(ly2 <- ggplotly(pd2p, width = 600, height = 600) %>%
+(ly2 <- ggplotly(pd2p, width = 610, height = 672) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
   animation_opts(800))
@@ -228,19 +315,23 @@ t <- list(
 
 
 ```
+</div>
 
-<br>
-<br>
+```{r 2over, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 
-```{r 2over, fig.align='center', fig.height=6, fig.width=6.25}
-pd2p + ggtitle("All sampling days")
+(ly2_2 <- ggplotly(pd2p2, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  config(displayModeBar = FALSE))
+
+# pd2p + ggtitle("All sampling days")
+
 ```
+</div>
 
-<br>
-<br>
-<br>
-
-<h3>Participant 3</h3>
+<h3 class = "pp-header">Participant 3</h3>
+<div class ="pp-box" align = "center">
+<div class= "ani-plot-container">
 ```{r circ PP3, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
  
 # add summary day of all points
@@ -267,12 +358,29 @@ pd3p <- ggplot(ppdf_3, aes(x = valence, y = arousal, label = emo_word)) +
   xlim(-50,50) +
   ylim(-50,50)
 
+# plot all points
+pd3p2 <- ggplot(ppdf_3, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity),
+             color = colors[3],
+             alpha = 0.4,width = 5) +
+  ggtitle("All sampling days") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
 t <- list(
   family = "IBM Plex Sans",
   size = 14,
   color = toRGB("grey50"))
 
-(ly3 <- ggplotly(pd3p, width = 600, height = 600) %>%
+(ly3 <- ggplotly(pd3p, width = 610, height = 672) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
   animation_opts(800))
@@ -281,19 +389,23 @@ t <- list(
 
 
 ```
+</div>
 
-<br>
-<br>
+```{r 3over, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 
-```{r 3over, fig.align='center', fig.height=6, fig.width=6.25}
-pd3p + ggtitle("All sampling days")
+(ly3_2 <- ggplotly(pd3p2, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  config(displayModeBar = FALSE))
+
+# pd3p + ggtitle("All sampling days")
+
 ```
+</div>
 
-<br>
-<br>
-<br>
-
-<h3>Participant 4</h3>
+<h3 class = "pp-header">Participant 4</h3>
+<div class ="pp-box" align = "center">
+<div class= "ani-plot-container">
 ```{r circ PP4, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 
 # add summary day of all points 
@@ -320,12 +432,29 @@ pd4p <- ggplot(ppdf_4, aes(x = valence, y = arousal, label = emo_word)) +
   xlim(-50,50) +
   ylim(-50,50)
 
+# plot all points
+pd4p2 <- ggplot(ppdf_4, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity),
+             color = colors[4],
+             alpha = 0.4,width = 5) +
+  ggtitle("All sampling days") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
 t <- list(
   family = "IBM Plex Sans",
   size = 14,
   color = toRGB("grey50"))
 
-(ly4 <- ggplotly(pd4p, width = 600, height = 600) %>%
+(ly4 <- ggplotly(pd4p, width = 610, height = 672) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
   animation_opts(800))
@@ -334,19 +463,23 @@ t <- list(
 
 
 ```
+</div>
 
-<br>
-<br>
+```{r 4over, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 
-```{r 4over, fig.align='center', fig.height=6, fig.width=6.25}
-pd4p + ggtitle("All sampling days")
+(ly4_2 <- ggplotly(pd4p2, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  config(displayModeBar = FALSE))
+
+# pd4p + ggtitle("All sampling days")
+
 ```
+</div>
 
-<br>
-<br>
-<br>
-
-<h3>Participant 5</h3>
+<h3 class = "pp-header">Participant 5</h3>
+<div class ="pp-box" align = center>
+<div class= "ani-plot-container">
 ```{r circ PP5, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 # # add summary day of all points
 # ppdf_5 <- rbind(ppdf_5,ppdf_5) %>% 
@@ -372,12 +505,29 @@ pd5p <- ggplot(ppdf_5, aes(x = valence, y = arousal, label = emo_word)) +
   xlim(-50,50) +
   ylim(-50,50)
 
+# plot all points
+pd5p2 <- ggplot(ppdf_5, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity),
+             color = colors[5],
+             alpha = 0.4,width = 5) +
+  ggtitle("All sampling days") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
 t <- list(
   family = "IBM Plex Sans",
   size = 14,
   color = toRGB("grey50"))
 
-(ly5 <- ggplotly(pd5p, width = 600, height = 600) %>%
+(ly5 <- ggplotly(pd5p, width = 610, height = 672) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
   animation_opts(800))
@@ -385,19 +535,22 @@ t <- list(
 # ggsave(here("fig",file = "pd5p.png"), width = 12, height = 12)
 
 ```
+</div>
 
-<br>
-<br>
+```{r 5over, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
+(ly5_2 <- ggplotly(pd5p2, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  config(displayModeBar = FALSE))
 
-```{r 5over, fig.align='center', fig.height=6, fig.width=6.25}
-pd5p + ggtitle("All sampling days")
+# pd5p + ggtitle("All sampling days")
+
 ```
+</div>
 
-<br>
-<br>
-<br>
-
-<h3>Participant 6</h3>
+<h3 class = "pp-header">Participant 6</h3>
+<div class ="pp-box" align = "center">
+<div class= "ani-plot-container">
 ```{r r circ PP6, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 # # add summary day of all points 
 # ppdf_6 <- rbind(ppdf_6,ppdf_6) %>% 
@@ -406,7 +559,6 @@ pd5p + ggtitle("All sampling days")
 # ppdf_6$sampling_day[(nrow(ppdf_6)/2 + 1):nrow(ppdf_6)] <- 99
 # # ppdf_6$sampling_day <- factor(ppdf_6$sampling_day, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14, 15,"sum"))
 
-# plot all points
 pd6p <- ggplot(ppdf_6, aes(x = valence, y = arousal, label = emo_word)) +
   theme_minimal() +
   theme(text=element_text(family="IBM Plex Sans")) +
@@ -417,9 +569,27 @@ pd6p <- ggplot(ppdf_6, aes(x = valence, y = arousal, label = emo_word)) +
   geom_hline(yintercept = 0, color = "darkgray") +
   geom_vline(xintercept = 0, color = "darkgray") +
   geom_jitter(aes(size = intensity, frame = sampling_day),
+  # geom_jitter(aes(size = intensity),
              color = colors[6],
              alpha = 0.4,width = 5) +
   # ggtitle("Participant 6") +
+  xlim(-50,50) +
+  ylim(-50,50)
+
+# plot all points
+pd6p2 <- ggplot(ppdf_6, aes(x = valence, y = arousal, label = emo_word)) +
+  theme_minimal() +
+  theme(text=element_text(family="IBM Plex Sans")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank()) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_jitter(aes(size = intensity),
+             color = colors[6],
+             alpha = 0.4,width = 5) +
+  ggtitle("All sampling days") +
   xlim(-50,50) +
   ylim(-50,50)
 
@@ -428,7 +598,7 @@ t <- list(
   size = 14,
   color = toRGB("grey50"))
 
-(ly6 <- ggplotly(pd6p, width = 600, height = 600) %>%
+(ly6 <- ggplotly(pd6p, width = 610, height = 672) %>%
   layout(font = t) %>%
   config(displaylogo = FALSE) %>%
   animation_opts(800))
@@ -437,23 +607,25 @@ t <- list(
 
 
 ```
+</div>
 
-<br>
-<br>
+```{r 6over, fig.width=6,fig.height=6, fig.align='center', fig.show='hold'}
 
-```{r 6over, fig.align='center', fig.height=6, fig.width=6.25}
-pd6p + ggtitle("All sampling days")
+(ly6_2 <- ggplotly(pd6p2, width = 600, height = 600) %>%
+  layout(font = t) %>%
+  config(displaylogo = FALSE) %>%
+  config(displayModeBar = FALSE))
+
+# pd6p + ggtitle("All sampling days")
+
 ```
+</div>
 
-<br>
-<br>
-<br>
-
-<br>
-
-<h3>All participants</h3>
+<h3 class = "pp-header">All participants</h3>
+<div class ="pp-box" align = "center">
+<div class= "ani-plot-container">
 ```{r small multiples}
-#--------------------#   
+#--------------------#    
 yaxis <- list(
   # title = 'arousal',
   # automargin = TRUE,
@@ -474,7 +646,7 @@ yaxis <- list(
 
 subplot(ly1, ly2, ly3, ly4, ly5, ly6, 
         nrows = 2, 
-        margin = 0.025,
+        # margin = 0.025,
         titleX = F,
         titleY = F,
         shareX = T,
@@ -495,7 +667,7 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
    animation_opts(800) 
 ```
 </div>
-
+</div>
 
 <div id = "footer">
 
@@ -504,3 +676,4 @@ provided by the <a href = "https://www.affective-science.org/">Interdisciplinary
 
 </div>
 
+</div>
