@@ -1,5 +1,6 @@
 
 ---
+title: Affective Trajectories
 output: html_document
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
@@ -9,6 +10,11 @@ knit: (function(input_file, encoding) {
 ---
 
 <style type="text/css">
+
+.title{
+    display: none;
+  }
+
 .main-container {
   max-width: 90%;
   margin-left: auto;
