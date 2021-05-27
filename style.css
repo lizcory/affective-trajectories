@@ -1,0 +1,250 @@
+body {
+  background-color: #FEFCFB;
+}
+
+.title{
+    display: none;
+}
+  
+.main-container {
+  max-width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/*$$$$*/
+
+.plotly{
+  margin: auto;
+  position: relative;
+}
+
+.ani-plot-container > .plotly {
+  min-width: 40vw;
+  max-width: 40vw;
+  min-height: 46vw;
+  max-height: 46vw;
+}
+
+.full-plot-container > .plotly {
+  min-width: 40vw;
+  max-width: 40vw;
+  min-height: 40vw;
+  max-height: 40vw;
+}
+
+/*$$$$*/
+
+.ani-plot-container {
+  padding-right: 1rem;
+  margin-bottom: 4rem;
+}
+
+.text {
+  width: 40vw;
+  margin: auto;
+  /*margin-bottom: 1rem;*/
+}
+
+.pp-header{
+  /*width: 100%;*/
+  font-weight: 500;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: "Roboto Slab", "Roboto", sans-serif;
+}
+
+.pp-box {
+  margin-bottom: 2rem;
+}
+
+.sub-head {
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+#overall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+}
+
+
+#title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 40vw;
+  font-size: 36pt;
+  font-weight: 500;
+  font-family: "Roboto Slab", "Roboto", sans-serif;
+}
+
+#opener {
+  margin-bottom: 1rem;  
+}
+
+#byline{
+  margin-bottom: 2rem;
+}
+
+#opener > p {
+  font-size: 12pt;
+  margin-bottom: 1rem;
+}
+
+#all-hdr {
+  margin-bottom: 0;
+}
+
+#footer {
+  margin-top: 4rem;
+  font-size: 10pt;
+}
+
+hr {
+  border: 0.5px solid #F7E7D9;
+  margin: 0;
+  width: 40vw;
+}
+
+/* ///////// ///////// ///////// ///////// ///////// ///////// */
+
+/* ///////// LARGE device ///////// */
+@media (max-width: 992px) { 
+  
+  .main-container{
+    width: 70vw;
+    /*margin-left: 2.5vw;*/
+    /*margin-right: 2.5vw;*/
+  }
+
+  #overall, .text, .pp-box, hr{
+    width: 70vw;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+  }
+
+  
+  #overall {
+    margin-top: 1rem;   
+  }
+   
+  .ani-plot-container {
+    padding-right: 1rem;
+  }
+  
+  #footer {
+    margin-top: 3rem;
+  }
+  
+
+/*$$$$*/
+
+.ani-plot-container > .plotly {
+  min-width: 50vw;
+  max-width: 50vw;
+  min-height: 56vw;
+  max-height: 56vw;
+}
+
+.full-plot-container > .plotly {
+  min-width: 50vw;
+  max-width: 50vw;
+  min-height: 50vw;
+  max-height: 50vw;
+}
+
+/*$$$$*/
+
+}
+
+/* /////////// SMALL device ///////// */
+@media (max-width: 576px) { 
+  
+  .main-container {
+    width: 95vw;
+  }
+  
+  #overall, .text, .pp-box, hr {
+    width: 95vw;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+  }
+  
+  /*$$$$*/
+
+.ani-plot-container > .plotly {
+  min-width: 70vw;
+  max-width: 70vw;
+  min-height: 78vw;
+  max-height: 78vw;
+}
+
+.full-plot-container > .plotly {
+  min-width: 70vw;
+  max-width: 70vw;
+  min-height: 70vw;
+  max-height: 70vw;
+}
+
+/*$$$$*/  
+  
+
+}
+
+
+/* ///////////// X-SMALL devices /////////// */
+@media (max-width: 400px) { 
+  
+ .main-container {
+    width: 95vw;
+  }
+  
+  #overall, .text, .pp-box, hr{
+    max-width: 95vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
+  
+  .pp-header {
+    min-width: 95vw; 
+    max-width: 95vw;
+  }
+
+/*$$$$*/
+
+.ani-plot-container > .plotly {
+  padding-right: 2rem;
+  min-width: 93vw;
+  max-width: 93vw;
+  min-height: 50vh;
+  max-height: 50vh;
+}
+
+.full-plot-container > .plotly {
+  min-width: 87vw;
+  max-width: 87vw;
+  min-height: 40vh;
+  max-height: 40vh;
+}
+
+/*$$$$*/
+
+
+  #footer {
+    margin-top: 2rem;
+  }
+  
+  
+  .pp-box {
+    margin-bottom: 0;
+  }
+  
+  
+}
