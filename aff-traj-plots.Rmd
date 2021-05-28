@@ -27,7 +27,7 @@ We all experience our feelings shifting — throughout the day and across period
 </p>
 
 <p class = "text">
-This project documents how six individuals move through affective space over a two-week period, or, their <i>affective trajectories</i>. By animating daily reported feelings, we can explore where in affective space each person spent the most time. We can also see what emotion words a person uses to describe their feelings at each location by hovering over the dots.
+This project documents how six individuals move through affective space over a two-week period, or, their <i>affective trajectories</i>. By animating daily reported feelings, we can explore where in affective space each person spent the most time. We can also see what emotion words they used to describe their feelings at each location by hovering over the dots.
 </p>
 
 </div>
