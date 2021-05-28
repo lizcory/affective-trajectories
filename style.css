@@ -38,6 +38,8 @@ body {
   max-height: 40vw;
 }
 
+
+
 /*$$$$*/
 
 .ani-plot-container {
@@ -147,17 +149,17 @@ hr {
 /*$$$$*/
 
 .ani-plot-container > .plotly {
-  min-width: 50vw;
-  max-width: 50vw;
-  min-height: 56vw;
-  max-height: 56vw;
+  min-width: 60vw;
+  max-width: 60vw;
+  min-height: 66vw;
+  max-height: 66vw;
 }
 
 .full-plot-container > .plotly {
-  min-width: 50vw;
-  max-width: 50vw;
-  min-height: 50vw;
-  max-height: 50vw;
+  min-width: 60vw;
+  max-width: 60vw;
+  min-height: 60vw;
+  max-height: 60vw;
 }
 
 /*$$$$*/
@@ -208,8 +210,8 @@ hr {
   
   #overall, .text, .pp-box, hr{
     max-width: 95vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
   }
   
   .pp-header {

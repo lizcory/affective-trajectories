@@ -144,6 +144,9 @@ t <- list(
          plot_bgcolor ='transparent',
          paper_bgcolor='transparent') %>% 
   config(displaylogo = FALSE) %>%
+  config(modeBarButtonsToRemove = c("lasso2d", "drawclosedpath",
+                                    "zoomIn2d", "zoomOut2d",
+                                    "select2d")) %>% 
   config(responsive = TRUE) %>% 
   animation_opts(800))
 
@@ -236,6 +239,9 @@ t <- list(
          plot_bgcolor ='transparent',
          paper_bgcolor='transparent') %>% 
   config(displaylogo = FALSE) %>%
+  config(modeBarButtonsToRemove = c("lasso2d", "drawclosedpath",
+                                    "zoomIn2d", "zoomOut2d",
+                                    "select2d")) %>% 
   config(responsive = TRUE) %>% 
   animation_opts(800))
 
@@ -326,6 +332,9 @@ t <- list(
          plot_bgcolor ='transparent',
          paper_bgcolor='transparent') %>% 
   config(displaylogo = FALSE) %>%
+  config(modeBarButtonsToRemove = c("lasso2d", "drawclosedpath",
+                                    "zoomIn2d", "zoomOut2d",
+                                    "select2d")) %>% 
   config(responsive = TRUE) %>% 
   animation_opts(800))
 
@@ -416,6 +425,9 @@ t <- list(
          plot_bgcolor ='transparent',
          paper_bgcolor='transparent') %>% 
   config(displaylogo = FALSE) %>%
+  config(modeBarButtonsToRemove = c("lasso2d", "drawclosedpath",
+                                    "zoomIn2d", "zoomOut2d",
+                                    "select2d")) %>% 
   config(responsive = TRUE) %>% 
   animation_opts(800))
 
@@ -506,6 +518,9 @@ t <- list(
          plot_bgcolor ='transparent',
          paper_bgcolor='transparent') %>% 
   config(displaylogo = FALSE) %>%
+  config(modeBarButtonsToRemove = c("lasso2d", "drawclosedpath",
+                                    "zoomIn2d", "zoomOut2d",
+                                    "select2d")) %>% 
   config(responsive = TRUE) %>% 
   animation_opts(800))
 
@@ -602,6 +617,9 @@ t <- list(
          plot_bgcolor ='transparent',
          paper_bgcolor='transparent') %>% 
   config(displaylogo = FALSE) %>%
+  config(modeBarButtonsToRemove = c("lasso2d", "drawclosedpath",
+                                    "zoomIn2d", "zoomOut2d",
+                                    "select2d")) %>% 
   config(responsive = TRUE) %>% 
   animation_opts(800))
  
@@ -641,7 +659,7 @@ t <- list(
   <h4 class = "sub-head text">Daily reported feelings</h4>
 </div>
 <div class ="pp-box">
-<div class= "ani-plot-container">
+<div id= "sm-mult" class= "ani-plot-container">
 ```{r small multiples, out.width="100%"}
 #--------------------#    
 subplot(ly1, ly2, ly3, ly4, ly5, ly6, 
@@ -652,17 +670,21 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
         shareX = T,
         shareY = T, 
         heights = c(0.36,0.36),
-        widths = c(0.325,0.325,0.325)) %>% 
+        widths = c(0.33,0.33,0.33)) %>% 
    layout(font = t,
           # width = 800, height = 650,
           # yaxis = yaxis,
           # xaxis = xaxis,
+          margin = list(l = 5,
+                        r = 5,
+                        t = 5,
+                        b = 5),
           title = title,
           annotations = list(
             list(x = 0.5 , y = -0.03, text = "valence", 
                  showarrow = F, xref='paper', yref='paper', 
                  xanchor = "middle", font = list(color ="black")),
-            list(x = -0.13 , y = 0.5, text = "arousal", 
+            list(x = -0.14 , y = 0.5, text = "arousal", 
                  showarrow = F, xref='paper', yref='paper',
                  yanchor = "middle", textangle = 270, 
                  font = list(color ="black")))) %>%
