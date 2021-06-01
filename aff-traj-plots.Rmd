@@ -22,11 +22,11 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align 
 <h1 id = "title" class = "text">Affective Trajectories</h1>
 <h4 id = "byline" class = "text">by Liz Cory</h4>
 
-<p class = "text">
+<p>
 We all experience our feelings shifting — throughout the day and across periods of our lives. For some of us, the changes are slight, while others may feel totally different from one day to the next. To better understand how our feelings work and change, psychologists map them along two dimensions: "valence" and "arousal." Valence captures how pleasant you feel, and arousal marks how activated you feel. Together, valence and arousal are termed "affect."
 </p>
 
-<p class = "text">
+<p>
 This project documents how six individuals move through affective space over a two-week period, or, their <i>affective trajectories</i>. By animating daily reported feelings, we can explore where in affective space each person spent the most time. We can also see what emotion words they used to describe their feelings at each location by hovering over the dots.
 </p>
 
@@ -696,9 +696,8 @@ subplot(ly1, ly2, ly3, ly4, ly5, ly6,
 </div>
 <hr>
 <div id = "footer" class = "text">
-
-Completed for ARTG 6100 Spring 2021, IDDV Program, Northeastern University. Data was
-provided by the <a href = "https://www.affective-science.org/">Interdisciplinary Affective Science Lab</a>.
-
+  <p>
+Completed for ARTG 6100 Spring 2021, IDDV Program, Northeastern University. Data was provided by the <a href = "https://www.affective-science.org/">Interdisciplinary Affective Science Lab</a>.
+  </p>
 </div>
 </div>

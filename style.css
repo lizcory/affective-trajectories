@@ -47,11 +47,12 @@ body {
   margin-bottom: 4rem;
 }
 
-.text {
+.text,p {
   width: 40vw;
   margin: auto;
   /*margin-bottom: 1rem;*/
 }
+
 
 .pp-header{
   /*width: 100%;*/
@@ -72,6 +73,7 @@ body {
 
 #overall {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   width: 40vw;
@@ -98,7 +100,7 @@ body {
 #opener > p {
   font-size: 12pt;
   margin-bottom: 1rem;
-  width: 100%;
+  /*width: 100%;*/
 }
 
 #all-hdr {
@@ -122,22 +124,25 @@ hr {
 @media (max-width: 992px) { 
   
   .main-container{
-    width: 70vw;
+    /*width: 70vw;*/
     /*margin-left: 2.5vw;*/
     /*margin-right: 2.5vw;*/
   }
 
-  #overall, .text, .pp-box, hr{
+  #overall {
     width: 70vw;
     margin-left: 2.5vw;
     margin-right: 2.5vw;
+    margin-top: 1rem;   
+
+  }
+  
+  .text, .pp-box, p, hr{
+    max-width: 70vw;
+    min-width: 65vw;
   }
 
   
-  #overall {
-    margin-top: 1rem;   
-  }
-   
   .ani-plot-container {
     padding-right: 1rem;
   }
@@ -175,19 +180,18 @@ hr {
     width: 100%;
   }
   
-  .main-container {
-    width: 95vw;
-  }
-  
-  #overall, .text, .pp-box, hr {
+  #overall{
     width: 95vw;
     margin-left: 2.5vw;
     margin-right: 2.5vw;
   }
   
-  p {
-    max-width: 90vw;
-  } 
+  
+  .text, .pp-box, p, hr{
+    max-width: 95vw;
+    min-width: 90vw;
+  }
+
   
   /*$$$$*/
 
@@ -220,28 +224,24 @@ hr {
     width: 100%;
   }
   
-  
  .main-container {
-    width: 95vw;
     margin-left: 0;
     margin-right: 0;
   }
   
-  #overall, .text, .pp-box, hr{
-    max-width: 95vw;
+  #overall {
+    width: 95vw;
     margin-left: 2vw;
     margin-right: 2vw;
   }
   
-  .pp-header {
-    min-width: 95vw; 
+  .text, .pp-box, p, hr{
     max-width: 95vw;
+    min-width: 90vw;
   }
 
-  p {
-    max-width: 90vw;
-  } 
-
+  
+  
 /*$$$$*/
 
 .ani-plot-container > .plotly {
