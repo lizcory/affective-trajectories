@@ -179,6 +179,7 @@ hr {
     margin-right: 2.5vw;
   }
   
+  
   /*$$$$*/
 
 .ani-plot-container > .plotly {
@@ -196,7 +197,8 @@ hr {
 }
 
 /*$$$$*/  
-  
+ 
+
 
 }
 
@@ -206,6 +208,8 @@ hr {
   
  .main-container {
     width: 95vw;
+    margin-left: 0;
+    margin-right: 0;
   }
   
   #overall, .text, .pp-box, hr{
@@ -218,6 +222,10 @@ hr {
     min-width: 95vw; 
     max-width: 95vw;
   }
+
+  p {
+    max-width: 95vw;
+  } 
 
 /*$$$$*/
 
