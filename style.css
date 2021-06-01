@@ -215,6 +215,12 @@ hr {
 /* ///////////// X-SMALL devices /////////// */
 @media (max-width: 450px) { 
   
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  
  .main-container {
     width: 95vw;
     margin-left: 0;
