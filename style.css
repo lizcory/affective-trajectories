@@ -204,7 +204,7 @@ hr {
 
 
 /* ///////////// X-SMALL devices /////////// */
-@media (max-width: 400px) { 
+@media (max-width: 450px) { 
   
  .main-container {
     width: 95vw;
