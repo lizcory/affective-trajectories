@@ -98,6 +98,7 @@ body {
 #opener > p {
   font-size: 12pt;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 #all-hdr {
@@ -169,6 +170,11 @@ hr {
 /* /////////// SMALL device ///////// */
 @media (max-width: 576px) { 
   
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
   .main-container {
     width: 95vw;
   }
@@ -179,6 +185,9 @@ hr {
     margin-right: 2.5vw;
   }
   
+  p {
+    max-width: 90vw;
+  } 
   
   /*$$$$*/
 
@@ -224,7 +233,7 @@ hr {
   }
 
   p {
-    max-width: 95vw;
+    max-width: 90vw;
   } 
 
 /*$$$$*/
